@@ -1,1 +1,1 @@
-# so_tasty
+# команда so_tasty
