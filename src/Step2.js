@@ -11,19 +11,19 @@ import { Input } from "./components/Input";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
-  firstName: yup
-    .string()
-    .required("Обязательное поле для заполнения"),
-  lastName: yup
-    .string()
-    .required("Обязательное поле для заполнения"),
+  // firstName: yup
+  //   .string()
+  //   .required("Обязательное поле для заполнения"),
+  // lastName: yup
+  //   .string()
+  //   .required("Обязательное поле для заполнения"),
 });
 
 export const Step2 = () => {
   const { setValues, data } = useData();
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm({
-    defaultValues: { firstName: data.firstName, lastName: data.lastName },
+    defaultValues: { flight: data.flight, meeting_place: data.meeting_place, time: data.time },
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
@@ -36,7 +36,7 @@ export const Step2 = () => {
   return (
     <MainContainer>
       <Typography component="h2" variant="h5">
-         Step 1
+         Step 2
       </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
@@ -44,27 +44,27 @@ export const Step2 = () => {
           id="firstName"
           type="text"
           label="Рейс"
-          name="firstName"
-          error={!!errors.firstName}
-          helperText={errors?.firstName?.message}
+          name="flight"
+          error={!!errors.flight}
+          helperText={errors?.flight?.message}
         />
         <Input
           ref={register}
           id="lastName"
-          type="text"
+          type="meeting_place"
           label="Место встречи"
-          name="lastName"
-          error={!!errors.lastName}
-          helperText={errors?.lastName?.message}
+          name="meeting_place"
+          error={!!errors.meeting_place}
+          helperText={errors?.meeting_place?.message}
         />
         <Input
           ref={register}
-          id="lastName"
+          id="time"
           type="text"
           label="Время"
-          name="lastName"
-          error={!!errors.lastName}
-          helperText={errors?.lastName?.message}
+          name="time"
+          error={!!errors.time}
+          helperText={errors?.time?.message}
         />
         <PrimaryButton>Дальше</PrimaryButton>
       </Form>

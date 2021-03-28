@@ -1,88 +1,87 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers";
-import { useData } from "./DataContext";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import {useHistory} from "react-router-dom";
+import {useData} from "./DataContext";
 import Typography from "@material-ui/core/Typography";
-import Checkbox from "@material-ui/core/Checkbox";
-import { PrimaryButton } from "./components/PrimaryButton";
-import { MainContainer } from "./components/MainContainer";
-import { Form } from "./components/Form";
-import { Input } from "./components/Input";
+import {useForm} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers";
+import {PrimaryButton} from "./components/PrimaryButton";
+import {MainContainer} from "./components/MainContainer";
+import {Form} from "./components/Form";
+import {Input} from "./components/Input";
 import * as yup from "yup";
-import { parsePhoneNumberFromString } from 'libphonenumber-js'
-
 
 const schema = yup.object().shape({
-  email: yup
-    .string()
-    .email("Email should have correct format")
-    .required("Корректное значени @mail ru/com"),
+    // firstName: yup
+    //     .string()
+    //     .required("Обязательное поле для заполнения"),
+    // lastName: yup
+    //     .string()
+    //     .required("Обязательное поле для заполнения"),
 });
 
-const normalizePhoneNumber = (value) => {
-  const phoneNumber = parsePhoneNumberFromString(value)
-  if(!phoneNumber){
-    return value
-  }
-
-  return (
-    phoneNumber.formatInternational() 
-  );
-};
-
 export const Step3 = () => {
-  const { setValues, data } = useData();
-  const history = useHistory();
-  const { register, handleSubmit, watch, errors } = useForm({
-    defaultValues: {
-      email: data.email,
-      hasPhone: data.hasPhone,
-      phoneNumber: data.phoneNumber,
-    },
-    mode: "onBlur",
-    resolver: yupResolver(schema),
-  });
-  const hasPhone = watch("hasPhone");
+    const {setValues, data} = useData();
+    const history = useHistory();
+    const {register, handleSubmit, errors} = useForm({
+        defaultValues: {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            category: data.category,
+            escort_features: data.escort_features
+        },
+        mode: "onBlur",
+        resolver: yupResolver(schema),
+    });
 
-  const onSubmit = (data) => {
-    history.push("./result");
-    setValues(data);
-  };
+    const onSubmit = (data) => {
+        history.push("./step4");
+        setValues(data);
+    };
 
-  return (
-    <MainContainer>
-      <Typography component="h2" variant="h5">
-         Step 3
-      </Typography>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          ref={register}
-          id="email"
-          type="email"
-          label="Email"
-          name="email"
-          error={!!errors.email}
-          helperText={errors?.email?.message}
-          required
-        />
-
-        
-        
-          <Input
-            ref={register}
-            id="phoneNumber"
-            type="tel"
-            label="Номер телефона"
-            name="phoneNumber"
-            onChange={(event) => {
-              event.target.value = normalizePhoneNumber(event.target.value);
-            }}
-          />
-        
-        <PrimaryButton>Next</PrimaryButton>
-      </Form>
-    </MainContainer>
-  );
+    return (
+        <MainContainer>
+            <Typography component="h2" variant="h5">
+                Step 3
+            </Typography>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+                <Input
+                    ref={register}
+                    id="firstName"
+                    type="text"
+                    label="Имя"
+                    name="firstName"
+                    error={!!errors.firstName}
+                    helperText={errors?.firstName?.message}
+                />
+                <Input
+                    ref={register}
+                    id="lastName"
+                    type="text"
+                    label="фамилия"
+                    name="lastName"
+                    error={!!errors.lastName}
+                    helperText={errors?.lastName?.message}
+                />
+                <Input
+                    ref={register}
+                    id="lastName"
+                    type="text"
+                    label="Категория пассажира"
+                    name="category"
+                    error={!!errors.lastName}
+                    helperText={errors?.lastName?.message}
+                />
+                <Input
+                    ref={register}
+                    id="lastName"
+                    type="text"
+                    label="Особенности сопровождения"
+                    name="escort_features"
+                    error={!!errors.escort_features}
+                    helperText={errors?.escort_features?.message}
+                />
+                <PrimaryButton>Дальше</PrimaryButton>
+            </Form>
+        </MainContainer>
+    );
 };

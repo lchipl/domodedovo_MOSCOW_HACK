@@ -9,6 +9,10 @@ import { MainContainer } from "./components/MainContainer";
 import { Form } from "./components/Form";
 import { Input } from "./components/Input";
 import * as yup from "yup";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
 
 const schema = yup.object().shape({
   firstName: yup
@@ -17,7 +21,7 @@ const schema = yup.object().shape({
     .required("Обязательное поле для заполнения"),
   lastName: yup
     .string()
-    
+
     .required("Обязательное поле для заполнения"),
 });
 
@@ -41,6 +45,23 @@ export const Step1 = () => {
          Step 1
       </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
+        {/*<FormControl variant="outlined" style={{width: '100%'}}>*/}
+        {/*<InputLabel id="demo-simple-select-outlined-label">Направление</InputLabel>*/}
+        {/*<Select*/}
+        {/*    ref={register}*/}
+        {/*    labelId="demo-simple-select-outlined-label"*/}
+        {/*    id="demo-simple-select-outlined"*/}
+        {/*    // value={direction}*/}
+        {/*    // onChange={handleChange}*/}
+        {/*    label="Направление"*/}
+        {/*>*/}
+        {/*  /!*<MenuItem value="">*!/*/}
+        {/*  /!*  <em>None</em>*!/*/}
+        {/*  /!*</MenuItem>*!/*/}
+        {/*  <MenuItem value="out">Отлёт</MenuItem>*/}
+        {/*  <MenuItem value="in">Прилёт</MenuItem>*/}
+        {/*</Select>*/}
+        {/*</FormControl>*/}
         <Input
           ref={register}
           id="firstName"
