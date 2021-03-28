@@ -12,6 +12,7 @@ import { Form } from "./components/Form";
 import { Input } from "./components/Input";
 import * as yup from "yup";
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
+import Button from "@material-ui/core/Button";
 
 
 const schema = yup.object().shape({
@@ -82,6 +83,7 @@ export const Step4 = () => {
           />
 
         <PrimaryButton>Next</PrimaryButton>
+        <Button onClick={() => history.push("./step3")}>Назад</Button>
       </Form>
     </MainContainer>
   );

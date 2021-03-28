@@ -9,6 +9,7 @@ import { MainContainer } from "./components/MainContainer";
 import { Form } from "./components/Form";
 import { Input } from "./components/Input";
 import * as yup from "yup";
+import Button from "@material-ui/core/Button";
 
 const schema = yup.object().shape({
   // firstName: yup
@@ -67,6 +68,7 @@ export const Step2 = () => {
           helperText={errors?.time?.message}
         />
         <PrimaryButton>Дальше</PrimaryButton>
+        <Button onClick={() => history.push("./")}>Назад</Button>
       </Form>
     </MainContainer>
   );

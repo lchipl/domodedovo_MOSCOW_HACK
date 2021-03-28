@@ -13,23 +13,24 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
+import Button from "@material-ui/core/Button";
 
 const schema = yup.object().shape({
-  firstName: yup
-    .string()
-    .matches(/^([^0-9]*)$/, "First name should not contain numbers")
-    .required("Обязательное поле для заполнения"),
-  lastName: yup
-    .string()
-
-    .required("Обязательное поле для заполнения"),
+  // firstName: yup
+  //   .string()
+  //   .matches(/^([^0-9]*)$/, "First name should not contain numbers")
+  //   .required("Обязательное поле для заполнения"),
+  // lastName: yup
+  //   .string()
+  //
+  //   .required("Обязательное поле для заполнения"),
 });
 
 export const Step1 = () => {
   const { setValues, data } = useData();
   const history = useHistory();
   const { register, handleSubmit, errors } = useForm({
-    defaultValues: { firstName: data.firstName, lastName: data.lastName },
+    defaultValues: { direction: data.direction, date: data.date },
     mode: "onBlur",
     resolver: yupResolver(schema),
   });
@@ -64,21 +65,21 @@ export const Step1 = () => {
         {/*</FormControl>*/}
         <Input
           ref={register}
-          id="firstName"
+          id="direction"
           type="text"
           label="Направление"
-          name="firstName"
-          error={!!errors.firstName}
-          helperText={errors?.firstName?.message}
+          name="direction"
+          error={!!errors.direction}
+          helperText={errors?.direction?.message}
         />
         <Input
           ref={register}
           id="lastName"
           type="text"
           label="Дата Рейса"
-          name="lastName"
-          error={!!errors.lastName}
-          helperText={errors?.lastName?.message}
+          name="date"
+          error={!!errors.date}
+          helperText={errors?.date?.message}
         />
         <PrimaryButton>Дальше</PrimaryButton>
       </Form>
